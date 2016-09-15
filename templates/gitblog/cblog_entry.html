@@ -1,0 +1,29 @@
+{% extends "cblog_base.html" %}
+{% block css %}
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href={% static "cblog/article.css" %}>
+<link rel="stylesheet" type="text/css" href={% static "cblog/edit.css" %}>
+<link rel="stylesheet" type="text/css" href={% static "cblog/pygments.css" %}>
+{% endblock %}
+{% block section %}
+    <div>
+        <ol>
+            {% if entry.isdraft %}
+                <li class="centerblock darken" >
+            {% else %}
+                <li class="centerblock" >
+            {% endif %}
+            <a><div class="ribbon">{{ entry.pub_date|date:"d M Y" }}</div></a>
+        {% if user.is_authenticated %}
+            <div class="articlemanage">
+                <a href={% url 'reverse_cblog_delete' entry.id %}><div class="articledelete">x</div></a>
+                <a href={% url 'reverse_cblog_edit' entry.id %}><div class="articleedit">+</div></a>
+            </div>
+        {% endif %}
+        <div class="article" id={{ entry.slug }}>
+            {% include 'cblog/cblog_body.html' with index="NO" %}
+        </div>
+        </li>
+        </ol>
+    </div>
+{% endblock %}

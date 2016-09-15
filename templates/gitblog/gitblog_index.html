@@ -1,0 +1,33 @@
+{% extends "gitblog_base.html" %}
+{% block css %}
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href={% static "gitblog/article.css" %}>
+<link rel="stylesheet" type="text/css" href={% static "gitblog/edit.css" %}>
+<link rel="stylesheet" type="text/css" href={% static "gitblog/pygments.css" %}>
+{% endblock %}
+{% block section %}
+    <div>
+    <ol>
+    {% for entry in entry_list %}
+         <li class="centerblock" >
+                <a><div class="ribbon">{{ entry.pub_date|date:"d M Y" }}</div></a>
+            <div class="article" id={{ entry.slug }}>
+                {% if forloop.first and entry_list.number == 1 %}
+                    {% include 'gitblog/gitblog_body.html' with index='YES' %}
+                {% else %}
+                    <div class="article_body">{{ entry.body_html|safe|truncatewords_html:100 }}<a href=#>MORE</a></div>
+                {% endif %}
+            </div>
+        </li>
+    {% endfor %}
+    </ol>
+    <div class="pageblock">
+        {% if entry_list.has_previous %}
+       <a href="?page={{ entry_list.previous_page_number }}"><span class="prevpage">prev</span></a>
+        {% endif %}
+        {% if entry_list.has_next %}
+        <a href="?page={{ entry_list.next_page_number }}"><span class="nextpage">next</span></a>
+        {% endif %}
+    </div>
+    </div>
+{% endblock %}

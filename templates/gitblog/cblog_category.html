@@ -1,0 +1,40 @@
+{% extends "cblog_base.html" %}
+{% block css %}
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href={% static "cblog/article.css" %}>
+{% endblock %}
+{% block section %}
+    <div>
+    <ol>
+    {% for category in category_list %}
+        <li class="centerblock" >
+                <a href="{% url 'reverse_cblog_category' category.category.id %}"><div class="ribbon">{{ category.category.title }}</div></a>
+            {% if user.is_authenticated %}
+            <div class="articlemanage">
+                <a href="{% url 'reverse_cblog_delete_category' category.category.id %}"><div class="articledelete">x</div></a>
+                <a href='#'><div class="articleedit">+</div></a>
+            </div>
+            {% endif %}
+            <div class="article" >
+                {% for entry in category.entries %}
+                    <p><a href="{% url 'reverse_cblog_entry' entry.slug entry.id %}">{{ entry.title }}</a></p>
+                {% endfor %}
+            </div>
+        </li>
+    {% endfor %}
+    </ol>
+    <!--div class="pageblock">
+        {% if entry_list.has_previous %}
+       <a href="?page={{ entry_list.previous_page_number }}"><span class="prevpage">prev</span></a>
+        {% endif %}
+        {% comment %}
+        <span class="current">
+            Page {{ entry_list.number }} of {{ entry_list.paginator.num_pages }}.
+        </span>
+        {% endcomment %}
+        {% if entry_list.has_next %}
+        <a href="?page={{ entry_list.next_page_number }}"><span class="nextpage">next</span></a>
+        {% endif %}
+    </div-->
+    </div>
+{% endblock %}

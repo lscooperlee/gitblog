@@ -1,0 +1,34 @@
+{% extends "cblog_base.html" %}
+{% block css %}
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href={% static "cblog/article.css" %}>
+{% endblock %}
+{% block section %}
+    <div>
+    <ol>
+    {% for year in article_year_list %}
+        <li class="centerblock" >
+                <a href="{% url 'reverse_cblog_datelist_article' year.year %}"><div class="ribbon">{{ year.year }}</div></a>
+            <div class="article" >
+                {% for entry in year.entries %}
+                    <p><a href="{% url 'reverse_cblog_entry' entry.slug entry.id %}">{{ entry.title }}</a></p>
+                {% endfor %}
+            </div>
+        </li>
+    {% endfor %}
+    </ol>
+    <!--div class="pageblock">
+        {% if entry_list.has_previous %}
+       <a href="?page={{ entry_list.previous_page_number }}"><span class="prevpage">prev</span></a>
+        {% endif %}
+        {% comment %}
+        <span class="current">
+            Page {{ entry_list.number }} of {{ entry_list.paginator.num_pages }}.
+        </span>
+        {% endcomment %}
+        {% if entry_list.has_next %}
+        <a href="?page={{ entry_list.next_page_number }}"><span class="nextpage">next</span></a>
+        {% endif %}
+    </div-->
+    </div>
+{% endblock %}

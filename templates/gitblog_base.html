@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href={% static "gitblog/style.css" %}>
+    {% block css %}
+    {% endblock %}
+    <title>{{ setting.title }}</title>
+</head>
+<body>
+<header class="banner">
+<div class="titletext" id="title"><a href="#"><h1>{{ setting.title }}</h1></a></div>
+<div class="titletext" id="subtitle">{{ setting.subtitle }}</div>
+<input id="searchinput" placeholder="Search" type="text" autocomplete="off" >
+</header>
+<nav class="banner">
+<div id="category" class="listdown">
+</div>
+<div id="navigator">
+    <ul>
+    </ul>
+</div>
+</nav>
+<div class="bodycenter">
+<section>
+{% block section %}
+{% endblock %}
+</section>
+<aside>
+
+</aside>
+</div>
+<footer>
+<div id="copyright">&copy; {% now "Y" %} Cooper</div>
+</footer>
+</body>
+</html>

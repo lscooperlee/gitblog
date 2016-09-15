@@ -1,0 +1,87 @@
+section form {
+    text-align: left;
+    margin-top: 2rem;
+    position: relative;
+}
+
+section form label {
+    display: inline-block;
+    text-align: right;
+    width: 5rem;
+    margin-right: 1rem;
+}
+
+
+section form input, section form textarea {
+    border: solid 1px #E5E5E5;
+    padding: 0.3rem;
+    font-size: 1.1rem;
+    outline: 0;
+    box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+    background: linear-gradient(to bottom, #f8f8f8, #fff);
+}
+
+section form .submit {
+    text-align: right;
+}
+
+section form .submit input {
+    padding: 0.3rem 0.6rem;
+    background: #617798;
+    border: 0;
+    font-size: 1.2rem;
+    color: #FFFFFF;
+    border-radius: 0.2rem;
+}
+
+section .commentwrap {
+    text-align: center;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin: 0;
+}
+
+section .commentwrap li {
+    text-align: left;
+    padding-left: 2rem;
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+    border-style: dashed;
+    border-color: rgba(233,233,233,0.8);
+    border-width: 0.15rem 0.1rem 0.1rem 0.1rem;
+    position: relative;
+}
+section .commentwrap li .commentmanage {
+    text-align: right;
+    padding: 0.5rem 0.5rem 0 0;
+    margin: 0;
+}
+
+section .commentwrap li blockquote {
+    font-style: italic;
+}
+
+section .commentwrap li:nth-child(odd){
+    background-color: #f8f8f8;
+}
+
+section .commentblock {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    background-color: white;
+    border-radius: 0.3rem;
+    padding-top: 1rem;
+    position: relative;
+    margin-bottom: 2rem;
+    margin-top: 4rem;
+    padding-bottom: 2rem;
+    border-style: dashed;
+    border-color: rgba(233,233,233,0.8);
+    border-width: 0.15rem 0.1rem 0.1rem 0.1rem;
+    display: block;
+}
+
+section .commentblock textarea {
+    width: 100%;
+}
+

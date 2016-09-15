@@ -1,0 +1,15 @@
+{% extends "cblog_base.html" %}
+{% block css %}
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href={% static "cblog/edit.css" %}>
+{% endblock %}
+{% block section %}
+    <div>
+    <form action="{% url 'reverse_cblog_edit' id %}" method="post" class="centerblock" >
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="submit">
+    <input type="submit" value="save" >
+    </div>
+    </form>
+{% endblock %}
