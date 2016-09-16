@@ -2,37 +2,145 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="http://bootstraptaste.com" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     {% load staticfiles %}
-    <link rel="stylesheet" type="text/css" href={% static "gitblog/style.css" %}>
+    <link rel="stylesheet" type="text/css" href={% static "gitblog/css/style.css" %}>
+    <link rel="stylesheet" type="text/css" href={% static "gitblog/css/custom.css" %}>
+    <link rel="stylesheet" type="text/css" href={% static "gitblog/css/pygments.css" %}>
+    <link rel="stylesheet" type="text/css" href={% static "gitblog/css/highlight.css" %}>
+
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
     {% block css %}
     {% endblock %}
-    <title>{{ setting.title }}</title>
-</head>
-<body>
-<header class="banner">
-<div class="titletext" id="title"><a href="#"><h1>{{ setting.title }}</h1></a></div>
-<div class="titletext" id="subtitle">{{ setting.subtitle }}</div>
-<input id="searchinput" placeholder="Search" type="text" autocomplete="off" >
-</header>
-<nav class="banner">
-<div id="category" class="listdown">
-</div>
-<div id="navigator">
-    <ul>
-    </ul>
-</div>
-</nav>
-<div class="bodycenter">
-<section>
-{% block section %}
-{% endblock %}
-</section>
-<aside>
 
-</aside>
+    <title>{{ setting.title }}</title>
+<!-- =======================================================
+    Theme Name: Moderna
+    Theme URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/
+    Author: BootstrapMade
+    Author URL: https://bootstrapmade.com
+======================================================= -->
+</head>
+
+<body>
+<div id="wrapper">
+	<!-- start header -->
+	<header>
+        <div class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{% url 'reverse_gitblog_index' %}"><span>C</span>reate or Die</a>
+                </div>
+            </div>
+        </div>
+	</header>
+
+	<section id="inner-headline">
+	<div class="container">
+		<div class="row">
+            <div class="col-lg-12"><br></div>
+		</div>
+	</div>
+	</section>
+    
+    {% comment %}
+	<section id="inner-headline">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<ul class="breadcrumb">
+					<li><a href="{% url 'reverse_gitblog_index' %}"><i class="fa fa-home"></i></a><i class="icon-angle-right"></i></li>
+					<li class="active">Blog</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	</section>
+    {% endcomment %}
+
+	<section id="content">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8">
+            {% block section %}
+            {% endblock %}
+			</div>
+
+			<div class="col-lg-4">
+				<aside class="right-sidebar">
+				<div class="widget">
+					<form class="form-search">
+						<input class="form-control" type="text" placeholder="Search..">
+					</form>
+				</div>
+                {% comment %}
+				<div class="widget">
+					<h5 class="widgetheading">Archive</h5>
+					<ul class="cat">
+                        {% for month in months %}
+                        <li><i class="icon-angle-right"><a href="{% url "blog_post_list_month" year=month.date.year month=month.date.month %}">{{ month.date|date:"F" }}</a> ({{ month.post_count }})</li>
+                        {% endfor %}
+					</ul>
+				</div>
+                {% endcomment %}
+
+				<div class="widget">
+					<h5 class="widgetheading">All articles</h5>
+					<ul class="recent">
+                         {% for recent_post in recent_posts %}
+                         <li>
+                             {% comment %}<img class="pull-left" alt="" src="{{ MEDIA_URL }}{% thumbnail recent_post.featured_image 65 65 %}">{% endcomment %}
+                             <div>
+                         <a href="{% url 'reverse_gitblog_entry' recent_post.slug %}">{{ recent_post.title }}</a>
+                             </div>
+                         </li>
+                         {% endfor %}
+					</ul>
+				</div>
+
+                {% comment %}
+				<div class="widget">
+					<h5 class="widgetheading">Popular tags</h5>
+					<ul class="tags">
+						<li><a href="#">Web design</a></li>
+						<li><a href="#">Trends</a></li>
+						<li><a href="#">Technology</a></li>
+						<li><a href="#">Internet</a></li>
+						<li><a href="#">Tutorial</a></li>
+						<li><a href="#">Development</a></li>
+					</ul>
+				</div>
+                {% endcomment %}
+				</aside>
+			</div>
+		</div>
+	</div>
+	</section>
+	<footer>
+	<div class="container"></div>
+	<div id="sub-footer"></div>
+	</footer>
 </div>
-<footer>
-<div id="copyright">&copy; {% now "Y" %} Cooper</div>
-</footer>
+<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
+<!-- javascript
+    ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
 </body>
 </html>

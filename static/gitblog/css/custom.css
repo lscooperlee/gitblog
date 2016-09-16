@@ -1,0 +1,42 @@
+header .navbar-default {
+    background-color: #eee;
+}
+
+/*for markdown*/
+article img {
+    display: block;
+    box-sizing: border-box;
+    height: auto;
+    max-width: 100%;
+    margin: 2rem auto;
+    padding: 0.4rem;
+    border: dotted silver;
+    border-width: 0.1rem;
+    box-shadow: 0 0 1rem silver;
+}
+
+a {
+    color: rgba(0, 158, 184, 1);
+    transition: color 0.3s;
+    outline: none;
+    cursor: pointer;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+    color: rgba(0, 158, 184, 1);
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    text-decoration: underline;
+    cursor: pointer;
+}
+

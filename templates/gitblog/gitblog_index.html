@@ -1,33 +1,42 @@
+
 {% extends "gitblog_base.html" %}
 {% block css %}
 {% load staticfiles %}
-<link rel="stylesheet" type="text/css" href={% static "gitblog/article.css" %}>
-<link rel="stylesheet" type="text/css" href={% static "gitblog/edit.css" %}>
-<link rel="stylesheet" type="text/css" href={% static "gitblog/pygments.css" %}>
+<link rel="stylesheet" type="text/css" href={% static "gitblog/css/article.css" %}>
+
 {% endblock %}
 {% block section %}
-    <div>
-    <ol>
     {% for entry in entry_list %}
-         <li class="centerblock" >
-                <a><div class="ribbon">{{ entry.pub_date|date:"d M Y" }}</div></a>
-            <div class="article" id={{ entry.slug }}>
-                {% if forloop.first and entry_list.number == 1 %}
-                    {% include 'gitblog/gitblog_body.html' with index='YES' %}
-                {% else %}
-                    <div class="article_body">{{ entry.body_html|safe|truncatewords_html:100 }}<a href=#>MORE</a></div>
-                {% endif %}
-            </div>
-        </li>
+
+        <article>
+                <p>
+                    {{ entry.body_html|truncatewords_html:150|safe }}
+                </p>
+                <div class="bottom-article">
+                    <ul class="meta-post">
+                        <li><i class="icon-calendar"></i><a href="{% url 'reverse_gitblog_entry' entry.slug%}">
+                                Modified {{ entry.pub_date|timesince }} ago</a></li>
+                        <li><i class="icon-user"></i><a href="{% url 'reverse_gitblog_entry' entry.slug%}">
+                                by {{ entry.author }}</a></li>
+
+                        <li><i class="icon-comments"></i><a href="{% url 'reverse_gitblog_entry' entry.slug%}#disqus_thread "></a></li>
+                    </ul>
+                    <a href="{% url 'reverse_gitblog_entry' entry.slug%}" class="pull-right">Continue reading
+                        <i class="icon-angle-right"></i>
+                    </a>
+                </div>
+        </article>
     {% endfor %}
-    </ol>
-    <div class="pageblock">
-        {% if entry_list.has_previous %}
-       <a href="?page={{ entry_list.previous_page_number }}"><span class="prevpage">prev</span></a>
+
+    <div id="pagination">
+        <span class="all">Page {{ page.current }} of {{ page.total }}</span>
+        {% for p in page.pages %}
+        {% if page.current == p %}
+        <span class="current">{{ p }}</span>
+        {% else %}
+        <a href="{% url 'reverse_gitblog_index' p %}" class="inactive">{{ p }}</a>
         {% endif %}
-        {% if entry_list.has_next %}
-        <a href="?page={{ entry_list.next_page_number }}"><span class="nextpage">next</span></a>
-        {% endif %}
+        {% endfor %}
     </div>
-    </div>
+
 {% endblock %}

@@ -1,0 +1,17 @@
+h2 {
+  font-weight: bold;
+  color: #888;
+  font-size: 120%;
+}
+
+h3 {
+  font-weight: normal;
+  color: #888;
+  font-size: 110%;
+}
+
+h4 {
+  font-weight: normal;
+  color: #888;
+  font-size: 100%;
+}
