@@ -1,0 +1,13 @@
+Django==1.9.12
+Markdown==2.6.9
+pandoc-attributes==0.1.7
+pandoc-eqnos==0.18.1
+pandoc-fignos==0.21.1
+pandoc-xnos==0.10
+pandocfilters==1.4.2
+pip==9.0.1
+psutil==5.4.0
+Pygments==2.2.0
+pypandoc==1.4
+setuptools==36.6.0
+wheel==0.30.0

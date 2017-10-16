@@ -3,16 +3,28 @@ header .navbar-default {
 }
 
 /*for markdown*/
-article img {
+article img, video {
     display: block;
     box-sizing: border-box;
     height: auto;
     max-width: 100%;
     margin: 2rem auto;
-    padding: 0.4rem;
     border: dotted silver;
     border-width: 0.1rem;
     box-shadow: 0 0 1rem silver;
+    padding: 0.4rem;
+}
+
+article figcaption {
+  font-family: 'Cherry Swash', cursive;
+  font-size: 80%;
+  border: none;
+  background: transparent;
+  word-wrap:normal;
+  text-align: center;
+  padding-top: 0;
+  padding-bottom: 0.5rem;
+
 }
 
 a {
