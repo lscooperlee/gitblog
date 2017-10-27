@@ -7,6 +7,7 @@ import os
 import pypandoc
 import re
 import math
+import functools
 from datetime import datetime
 
 setting = {
@@ -16,6 +17,26 @@ setting = {
 
 SITE_ROOT = settings.MEDIA_ROOT
 BLOG_DIR = "{}/gitblog/".format(settings.MEDIA_ROOT)
+
+
+class Cache:
+
+    def __init__(self):
+        self._cache = {}
+
+    def get(self, key, condition, action):
+        try:
+            oldcond, oldcontent = self._cache[key]
+            if not condition or condition > oldcond:
+                self._cache[key] = condition, action()
+        except:
+            self._cache[key] = condition, action()
+
+        _, content = self._cache[key]
+        return content
+
+
+contentCache = Cache()
 
 
 def read_file(filename):
@@ -51,7 +72,7 @@ def get_slug(filename):
     return os.path.basename(filename)
 
 
-def gen_markdown_content(filename, content, cache_dir="/tmp/gitblog"):
+def gen_markdown_content(filename, content):
     extradir = os.path.splitext(filename)[0]
     bibfile = "{0}/bib.bib".format(extradir)
 
@@ -79,6 +100,14 @@ def gen_markdown_content(filename, content, cache_dir="/tmp/gitblog"):
     entry["title"] = extract_markdown_title(content)
 
     return entry
+
+
+def get_cached_content(filename, content):
+        key = filename
+        condition = os.path.getmtime(filename)
+        action = functools.partial(gen_markdown_content, filename, content)
+
+        return contentCache.get(key, condition, action)
 
 
 def content_decorator_image_filter(*args, **kwargs):
@@ -204,7 +233,7 @@ def gitblog_index(request, **kwargs):
             decor = Decorator(request, **kwargs)
             c = decor(c)
 
-        entry_list.append(gen_markdown_content(f, c))
+        entry_list.append(get_cached_content(f, c))
 
     page = {
             "total": str(total_page),
@@ -229,7 +258,7 @@ def gitblog_entry(request, slug):
             decor = Decorator()
             c = decor(c)
 
-        entry = gen_markdown_content(filename, c)
+        entry = get_cached_content(filename, c)
     except:
         raise Http404()
 
