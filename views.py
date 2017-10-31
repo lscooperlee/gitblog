@@ -1,14 +1,15 @@
-from django.shortcuts import render
-
-from django.http import Http404
-from django.conf import settings
-
 import os
 import pypandoc
 import re
 import math
 import functools
+
 from datetime import datetime
+from django.shortcuts import render
+from django.http import Http404
+from django.conf import settings
+
+from .geo import GeoIPtoDB
 
 setting = {
     "title": "Create or Die",
@@ -207,6 +208,7 @@ def get_recent_articles(request, **kwargs):
     return latest_articles
 
 
+@GeoIPtoDB
 def gitblog_index(request, **kwargs):
 
     if 'article_num' not in kwargs:
@@ -250,6 +252,7 @@ def gitblog_index(request, **kwargs):
     return render(request, "gitblog/gitblog_index.html", c)
 
 
+@GeoIPtoDB
 def gitblog_entry(request, slug):
     try:
         filename = BLOG_DIR + slug
