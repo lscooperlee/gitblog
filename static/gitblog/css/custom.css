@@ -2,31 +2,6 @@ header .navbar-default {
     background-color: #eee;
 }
 
-/*for markdown*/
-article img, video {
-    display: block;
-    box-sizing: border-box;
-    height: auto;
-    max-width: 100%;
-    margin: 2rem auto;
-    border: dotted silver;
-    border-width: 0.1rem;
-    box-shadow: 0 0 1rem silver;
-    padding: 0.4rem;
-}
-
-article figcaption {
-  font-family: 'Cherry Swash', cursive;
-  font-size: 80%;
-  border: none;
-  background: transparent;
-  word-wrap:normal;
-  text-align: center;
-  padding-top: 0;
-  padding-bottom: 0.5rem;
-
-}
-
 a {
     color: rgba(0, 158, 184, 1);
     transition: color 0.3s;
@@ -52,3 +27,27 @@ a:active {
     cursor: pointer;
 }
 
+/*for markdown*/
+article img, video {
+    display: block;
+    box-sizing: border-box;
+    height: auto;
+    max-width: 100%;
+    margin: 2rem auto;
+    border: dotted silver;
+    border-width: 0.1rem;
+    box-shadow: 0 0 1rem silver;
+    padding: 0.4rem;
+}
+
+article figcaption {
+  font-family: 'Cherry Swash', cursive;
+  font-size: 80%;
+  border: none;
+  background: transparent;
+  word-wrap:normal;
+  text-align: center;
+  padding-top: 0;
+  padding-bottom: 0.5rem;
+
+}
