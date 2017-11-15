@@ -51,3 +51,14 @@ article figcaption {
   padding-bottom: 0.5rem;
 
 }
+
+article h1 a, article h1 a:visited, article h1 a:link, article h1 a:active {
+    color: #444;
+    text-decoration: none;
+}
+
+article h1 a:hover {
+    color: #000;
+    text-decoration: none;
+}
+

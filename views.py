@@ -57,16 +57,18 @@ def read_file(filename):
 
 def get_markdown_title(filename):
     with open(filename, 'r') as f:
-        return extract_markdown_title(f.read())
+        return split_markdown_title(f.read())[0]
 
 
-def extract_markdown_title(content):
+def split_markdown_title(content):
     for l in content.splitlines():
         l = l.strip()
         if l.startswith("#"):
-            return l.strip("#")
+            title = l.strip("#")
+            content = content.split(title, maxsplit=1)[-1].strip()
+            return title, content
 
-    return "undefined"
+    return "undefined", content
 
 
 def get_slug(filename):
@@ -87,8 +89,9 @@ def gen_markdown_content(filename, content):
         pdoc_args += ["--bibliography={0}".format(bibfile),
                       "--filter=pandoc-citeproc"]
 
-    entry = {}
+    title, content = split_markdown_title(content)
 
+    entry = {}
     entry['slug'] = get_slug(filename)
     body_html = pypandoc.convert_text(source=content,
                                       format="markdown",
@@ -98,7 +101,7 @@ def gen_markdown_content(filename, content):
     entry["body_html"] = body_html
     entry["pub_date"] = datetime.fromtimestamp(os.path.getmtime(filename))
     entry["author"] = "me"
-    entry["title"] = extract_markdown_title(content)
+    entry["title"] = title
 
     return entry
 

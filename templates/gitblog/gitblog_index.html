@@ -10,18 +10,21 @@
 
         <article>
                 <p>
+                <h1><a href="{% url 'reverse_gitblog_entry' entry.slug %}">{{ entry.title }}</a></h1>
+                </p>
+                <p>
                     {{ entry.body_html|truncatewords_html:150|safe }}
                 </p>
                 <div class="bottom-article">
                     <ul class="meta-post">
-                        <li><i class="icon-calendar"></i><a href="{% url 'reverse_gitblog_entry' entry.slug%}">
+                        <li><i class="icon-calendar"></i><a href="{% url 'reverse_gitblog_entry' entry.slug %}">
                                 Modified {{ entry.pub_date|timesince }} ago</a></li>
-                        <li><i class="icon-user"></i><a href="{% url 'reverse_gitblog_entry' entry.slug%}">
+                        <li><i class="icon-user"></i><a href="{% url 'reverse_gitblog_entry' entry.slug %}">
                                 by {{ entry.author }}</a></li>
 
-                        <li><i class="icon-comments"></i><a href="{% url 'reverse_gitblog_entry' entry.slug%}#disqus_thread "></a></li>
+                        <li><i class="icon-comments"></i><a href="{% url 'reverse_gitblog_entry' entry.slug %}#disqus_thread "></a></li>
                     </ul>
-                    <a href="{% url 'reverse_gitblog_entry' entry.slug%}" class="pull-right">Continue reading
+                    <a href="{% url 'reverse_gitblog_entry' entry.slug %}" class="pull-right">Continue reading
                         <i class="icon-angle-right"></i>
                     </a>
                 </div>
